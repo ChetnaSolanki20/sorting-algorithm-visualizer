@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sorting Visualizer</title>
+  <link rel="stylesheet" href="Style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Top Title Banner -->
+  <header class="title-header">
+    <h1>SORTING VISUALIZER</h1>
+    <div class="subtitle">9 algorithms &middot; live complexity &middot; step-by-step playback</div>
+  </header>
+
+  <!-- Top Control Panel Bar -->
+  <div class="control-card">
+    <div class="control-item">
+      <label for="algoSelect">ALGORITHM</label>
+      <select id="algoSelect">
+        <option value="BUBBLE">Bubble Sort</option>
+        <option value="SELECTION">Selection Sort</option>
+        <option value="INSERTION">Insertion Sort</option>
+        <option value="SHELL">Shell Sort</option>
+        <option value="QUICK">Quick Sort</option>
+        <option value="MERGE" selected>Merge Sort</option>
+        <option value="HEAP">Heap Sort</option>
+        <option value="RADIX">Radix Sort</option>
+        <option value="BUCKET">Bucket Sort</option>
+      </select>
+    </div>
+
+    <div class="control-item">
+      <label for="patternSelect">PATTERN</label>
+      <select id="patternSelect">
+        <option value="RANDOM" selected>Random</option>
+        <option value="NEARLY_SORTED">Nearly Sorted</option>
+        <option value="REVERSED">Reversed</option>
+        <option value="FEW_UNIQUE">Few Unique Values</option>
+      </select>
+    </div>
+
+    <div class="control-item">
+      <label for="speedSelect">SPEED</label>
+      <select id="speedSelect">
+        <option value="5">Ultra Fast</option>
+        <option value="20" selected>Fast</option>
+        <option value="50">Medium</option>
+        <option value="120">Slow</option>
+      </select>
+    </div>
+
+    <div class="control-item">
+      <label for="sizeSelect">SIZE</label>
+      <select id="sizeSelect">
+        <option value="30">30 Elements</option>
+        <option value="60" selected>60 Elements</option>
+        <option value="100">100 Elements</option>
+        <option value="150">150 Elements</option>
+      </select>
+    </div>
+
+    <div class="button-group">
+      <button type="button" id="btnRandomize" class="btn btn-light">New Array</button>
+      <button type="button" id="btnStep" class="btn btn-light">Step</button>
+      <button type="button" id="btnPause" class="btn btn-amber" disabled>Pause</button>
+      <button type="button" id="btnSort" class="btn btn-blue">Start Sort</button>
+    </div>
+  </div>
+
+  <!-- Main Content Area -->
+  <main class="main-workspace">
+    <!-- Left Visualization Box -->
+    <div class="visualizer-card">
+      <div class="legend-bar">
+        <span class="legend-item"><span class="dot default"></span> Default</span>
+        <span class="legend-item"><span class="dot compare"></span> Comparing</span>
+        <span class="legend-item"><span class="dot swap"></span> Overwrite / Swap</span>
+        <span class="legend-item"><span class="dot sorted"></span> Sorted</span>
+        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      </div>
+
+      <div class="canvas-box">
+        <canvas id="visualizerCanvas"></canvas>
+      </div>
+    </div>
+
+    <!-- Right Information & Complexity Panel -->
+    <aside class="info-card">
+      <div class="info-header">
+        <h3>ALGORITHM METRICS</h3>
+        <span id="displayAlgoName" class="algo-badge">MERGE SORT</span>
+      </div>
+
+      <!-- Live Complexity Dashboard -->
+      <div class="complexity-container">
+        <div class="complexity-row">
+          <span>Best Case:</span>
+          <strong id="compBest">O(n log n)</strong>
+        </div>
+        <div class="complexity-row">
+          <span>Average Case:</span>
+          <strong id="compAvg">O(n log n)</strong>
+        </div>
+        <div class="complexity-row">
+          <span>Worst Case:</span>
+          <strong id="compWorst">O(n log n)</strong>
+        </div>
+        <div class="complexity-row">
+          <span>Space Complexity:</span>
+          <strong id="compSpace">O(n)</strong>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- Live Performance Telemetry -->
+      <div class="metrics-container">
+        <div class="metric-row">
+          <span>Comparisons:</span>
+          <strong id="statComparisons">0</strong>
+        </div>
+        <div class="metric-row">
+          <span>Array Writes:</span>
+          <strong id="statSwaps">0</strong>
+        </div>
+        <div class="metric-row">
+          <span>Elapsed Time:</span>
+          <strong id="statTime">0.00s</strong>
+        </div>
+        <div class="metric-row">
+          <span>Progress:</span>
+          <strong id="statProgress">0%</strong>
+        </div>
+      </div>
+
+      <div class="status-pill" id="statusPill">READY</div>
+    </aside>
+  </main>
+
+  <script src="Script.js"></script>
+</body>
+</html>
